@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/products")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -32,5 +32,10 @@ public class ProductController {
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable int id) {
+        productService.deleteProduct(id);
     }
 }

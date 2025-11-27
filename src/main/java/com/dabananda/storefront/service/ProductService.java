@@ -32,4 +32,9 @@ public class ProductService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(API_URL, product, Product.class);
     }
+
+    public void deleteProduct(int id) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(API_URL + "/" + id);
+    }
 }
