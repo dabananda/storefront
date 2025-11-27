@@ -27,4 +27,9 @@ public class ProductService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(API_URL + "/" + id, Product.class);
     }
+
+    public Product addProduct(Product product) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForObject(API_URL, product, Product.class);
+    }
 }
