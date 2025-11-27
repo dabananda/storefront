@@ -16,4 +16,10 @@ public class ProductService {
         Product[] products = restTemplate.getForObject(API_URL, Product[].class);
         return Arrays.asList(products);
     }
+
+    public List<String> getAllCategories() {
+        RestTemplate restTemplate = new RestTemplate();
+        String[] categories = restTemplate.getForObject(API_URL + "/categories", String[].class);
+        return Arrays.asList(categories);
+    }
 }
