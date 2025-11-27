@@ -37,4 +37,11 @@ public class ProductService {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(API_URL + "/" + id);
     }
+
+    public Product updateProduct(int id, Product product) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(API_URL + "/" + id, product);
+        product.setId(id);
+        return product;
+    }
 }
