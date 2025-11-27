@@ -22,4 +22,9 @@ public class ProductService {
         String[] categories = restTemplate.getForObject(API_URL + "/categories", String[].class);
         return Arrays.asList(categories);
     }
+
+    public Product getProductById(int id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(API_URL + "/" + id, Product.class);
+    }
 }
