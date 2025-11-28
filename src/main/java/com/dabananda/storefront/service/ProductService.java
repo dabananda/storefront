@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final String API_URL = "https://fakestoreapi.com/products";
 
-//    public List<Product> getAllProducts() {
-//        RestTemplate restTemplate = new RestTemplate();
-//        Product[] products = restTemplate.getForObject(API_URL, Product[].class);
-//        return Arrays.asList(products);
-//    }
-
-    public PaginatedResponse<Product> getAllProducts(int page, int size, String search) {
+    public PaginatedResponse<Product> getAllProducts(int page, int size, String search, String category) {
         RestTemplate restTemplate = new RestTemplate();
         Product[] productsArray = restTemplate.getForObject(API_URL,  Product[].class);
         List<Product> allProducts = productsArray != null ? Arrays.asList(productsArray) : Collections.emptyList();
 
+        // category filter
+        if (category != null && !category.isEmpty() && !"all".equalsIgnoreCase(category)) {
+            allProducts = allProducts.stream().filter(p -> p.getCategory().equalsIgnoreCase(category)).collect(Collectors.toList());
+        }
+
+        // search filter
         if (search != null && !search.isEmpty()) {
             String lowerCaseSearch = search.toLowerCase();
             allProducts = allProducts.stream().filter(p -> p.getTitle().toLowerCase().contains(lowerCaseSearch) || p.getCategory().toLowerCase().contains(lowerCaseSearch) || p.getDescription().toLowerCase().contains(lowerCaseSearch)).collect(Collectors.toList());

@@ -14,18 +14,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-//    @GetMapping
-//    public List<Product> getProducts() {
-//        return productService.getAllProducts();
-//    }
-
     @GetMapping
     public PaginatedResponse<Product> getProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "8") int size,
-            @RequestParam(required = false) String search
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String category
     ) {
-        return productService.getAllProducts(page, size, search);
+        return productService.getAllProducts(page, size, search, category);
     }
 
     @GetMapping("/categories")
