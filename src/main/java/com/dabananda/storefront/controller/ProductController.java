@@ -1,5 +1,6 @@
 package com.dabananda.storefront.controller;
 
+import com.dabananda.storefront.dto.PaginatedResponse;
 import com.dabananda.storefront.service.ProductService;
 import com.dabananda.storefront.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,18 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+//    @GetMapping
+//    public List<Product> getProducts() {
+//        return productService.getAllProducts();
+//    }
+
     @GetMapping
-    public List<Product> getProducts() {
-        return productService.getAllProducts();
+    public PaginatedResponse<Product> getProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "8") int size,
+            @RequestParam(required = false) String search
+    ) {
+        return productService.getAllProducts(page, size, search);
     }
 
     @GetMapping("/categories")
